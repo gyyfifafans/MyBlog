@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+     <!-- 引入jQuery -->
+    <script src="{% static 'bootstrap/js/jquery-ui.min.js' %}"></script>
+    <script src="{%static 'bootstrap/js/jquery-2.1.4.min.js'%}"></script>
+     <!-- 引入 Bootstrap -->
+     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static  'bootstrap/css/bootstrap-theme.min.css'%}"  rel="stylesheet"  type="text/css">
+     <link href="{% static  'bootstrap/css/theme.css'%}"  rel="stylesheet">
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <!--加上下面的js，下拉菜单打不开-->
+     <!--script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"--><!--/script-->          
+
+    <title>数据展示平台</title>         
+</head>
+<body>
+<!-- bootstrap 特性容器 -->
+ <div class="container">
+     <h1>Hello, world! </h1> 
+     <button type="button" class="btn btn-lg btn-info">操作</button>
+           <button type="button" class="btn btn-lg btn-danger">Danger</button>
+<div class="btn-group">
+   <button type="button" class="btn btn-primary dropdown-toggle" 
+      data-toggle="dropdown">
+      操作 <span class="caret"></span>
+   </button>
+   <ul class="dropdown-menu" role="menu">
+      <li><a href="http://www.baidu.com">查看</a></li>
+      <li><a href="#">编辑</a></li>
+      <li><a href="#">删除</a></li>
+      <li class="divider"></li>
+      <li><a href="#">分离的链接</a></li>
+   </ul>
+</div>
+</div>
+</body>
+</html>

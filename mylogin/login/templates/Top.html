@@ -1,0 +1,36 @@
+﻿	<!--%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%-->
+	<!--%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %-->
+<head lang="en">
+    <meta charset="UTF-8">
+</head>
+<body>
+	<!-- 页面TOP -->
+	<div id="header">
+			<h1><a href=""></a></h1>	
+	</div>				
+
+		<div id="user-nav" class="navbar navbar-inverse">
+            <ul class="nav btn-group">
+            	<!-- <li>
+            		<img src="../img/welcome.gif" />
+            	</li> -->
+                <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span class="text"><security:authentication property="name"/></span><b class="caret"></b></a>
+                    <ul class="dropdown-menu">                   		 
+                   			 <form method="post" action="../SsUsers/ApplyChangePSW.do">
+                   			 <input type="hidden" name="useraccount" id="useraccount" value='<security:authentication property="name"/>'/>
+                      		 <input type="submit" value="修改密码" class="btn btn-mini"><i class="icon-pencil icon-white"></i></input></form>                  		
+                    </ul>
+                </li>     
+                <li class="btn btn-inverse"><a title="" href="../DepartmentInfo/GetAllView.do?id_menu=Department&useraccount=<security:authentication property="name"/>"><i class="icon icon-cog"></i> <span class="text">系统管理</span></a></li>
+                 <li class="btn btn-inverse"><a href="../share/help.jsp"><i class="icon icon-tasks"></i> <span class="text">帮助</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="sAdd" title="" href="#"></a></li>
+                        <li><a class="sInbox" title="" href="#">inbox</a></li>
+                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
+                        <li><a class="sTrash" title="" href="#">trash</a></li>
+                    </ul>
+                </li>    
+                <li class="btn btn-inverse"><a title="" href="../login.jsp" onclick="return(confirm('您确定要注销吗？'))"><i class="icon icon-share-alt"></i> <span class="text">注销</span></a></li>
+            </ul>
+        </div>      
+</body>

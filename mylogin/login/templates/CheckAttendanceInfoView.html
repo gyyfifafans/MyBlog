@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!-- 引入jQuery -->
+    <script src="{% static 'bootstrap/js/jquery-ui.min.js' %}"></script>
+    <script src="{%static 'bootstrap/js/jquery-2.1.4.min.js'%}"></script>
+     <!-- 引入 Bootstrap -->
+     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static  'bootstrap/css/bootstrap-theme.min.css'%}"  rel="stylesheet"  type="text/css">
+     <link href="{% static  'bootstrap/css/theme.css'%}"  rel="stylesheet">
+      <script type="text/javascript" src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+     <!--引用的东西在include的页面里也能生效，但是要考虑功能实现对所引用的版本问题-->
+
+
+
+</head>
+<body>
+
+	<!-- 引入页面TOP -->
+	<!--不要重复引用js，会导致功能不正常-->
+	<!--include 是导入模板，extends是继承模板，继承只能有一个，而且要写在html最 -->
+	{% include "Top.html" %}
+
+	<!-- 引入左侧导航 -->
+<div style="float:left;width:20%">
+	{% include "LeftNavigate_SysManage.html" %}
+</div>
+<div id="content" style="float:right;width:77%">
+		<div id="content-header">
+			<h1>考勤信息</h1>
+		</div>
+		<div id="breadcrumb">
+			<!-- 引入首页链接 -->
+			<a href="#" class="tip-bottom">考勤管理></a> <a href="#" class="current">考勤信息</a>
+		</div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+
+					<div class="widget-box">
+
+						<div class="widget-title">
+							<h5>考勤信息</h5>
+							<table>
+								<tr>
+									<td><form>
+											<input type="hidden" name="useraccount" id="useraccount"
+												value='<security:authentication property="name"/>' />
+											<security:authorize
+												access="hasAnyRole('ROLE_CHECKADD','ROLE_ADMIN')">
+												<input type="button" style="width:100%" value="上班打卡"
+													class="btn btn-info btn" onclick="open1()">
+											</security:authorize>
+											<input type="hidden" name="useraccount" id="useraccount"
+												value='<security:authentication property="name"/>' />
+
+										</form></td>
+									<td>
+										<form method="post"
+											action="../CheckAttendanceInfo/Getbyid.do?id_menu=c_getAll">
+											<input type="hidden" name="useraccount" id="useraccount"
+												value='<security:authentication property="name"/>' />
+											<security:authorize
+												access="hasAnyRole('ROLE_CHECKADD','ROLE_ADMIN')">
+												<input type="button" style="width:100%" value="下班打卡"
+													class="btn btn-info btn" onclick="open2()">
+											</security:authorize>
+
+										</form></td>
+								</tr>
+							</table>
+							<script type="text/javascript">
+										function open1(){
+											var useraccount = document.getElementById("useraccount").value;
+											Dialog.open({URL:"../CheckAttendanceInfo/CheckAttendanceInfoAdd1.do?useraccount="+useraccount+""});
+											//location.reload([true]);
+										}
+									</script>
+							<script type="text/javascript">
+										function open2(){
+											var useraccount = document.getElementById("useraccount").value;
+											Dialog.open({URL:"../CheckAttendanceInfo/Getbyid1.do?useraccount="+useraccount+""});
+											//location.reload([true]);
+										}
+									</script>
+
+						</div>
+						<div class="widget-content nopadding">
+							<table class="table table-bordered data-table">
+								<thead>
+									<tr>
+										<th>员工姓名</th>
+										<th>部门</th>
+										<th>上班时间</th>
+										<th>下班时间</th>
+										<th>备注</th>
+										<th>录入时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+									<c:if test="${!empty CheckAttendanceInfo }">
+										<c:forEach items="${CheckAttendanceInfo }" var="tmp">
+											<tr>
+												<td>${tmp.peopleName}</td>
+												<td>${tmp.peopleDept}</td>
+												<td>${tmp.attendTime}</td>
+												<td>${tmp.leaveTime}</td>
+												<td>${tmp.remarks}</td>
+												<td>${tmp.entryTime}</td>
+												<td align="center" valign="middle" width="65px">
+													<div class="btn-group">
+														<button data-toggle="dropdown"
+															class="btn btn-info dropdown-toggle">
+															操作 <span class="caret"></span>
+														</button>
+														<ul class="dropdown-menu">
+															<security:authorize
+																access="hasAnyRole('ROLE_CHECKVIEW','ROLE_ADMIN')">
+																<li><a
+																	href="<%=path %>/CheckAttendanceInfo/Lookup.do?id=${tmp.id }&id_menu=c_getAll">查看</a>
+																</li>
+															</security:authorize>
+															<security:authorize
+																access="hasAnyRole('ROLE_CHECKDEL','ROLE_ADMIN')">
+																<li><a
+																	href="<%=path %>/CheckAttendanceInfo/Del.do?id=${tmp.id }"
+																	onclick="return(confirm('确定删除?'))">删除</a></li>
+															</security:authorize>
+														</ul>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 引入页脚 -->
+			{%include  "footer.html"%}
+
+		</div>
+	</div>
+	<script type="text/javascript">
+      function toAdd(){
+      	window.location = "CheckAttendanceInfoAdd.do?id_menu=c_getAll";
+      }
+   </script>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery.ui.custom.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/jquery.uniform.js"></script>
+	<script src="../js/select2.min.js"></script>
+	<script src="../js/jquery.dataTables.min.js"></script>
+	<!-- <script src="../js/unicorn.form_validation.js"></script> -->
+	<script src="../js/unicorn.js"></script>
+	<script src="../js/zDialog.js"></script>
+	<script src="../js/zDrag.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+     $(".data-table").dataTable({
+		 "bProcessing" : false, //DataTables载入数据时，是否显示‘进度’提示  
+		 "bJQueryUI" : true, //是否使用 jQury的UI 
+		 "bLengthChange": true,//开启一页显示多少条数据的下拉菜单
+		 "iDisplayLength" : 10, //默认显示的记录数  
+		 "bAutoWidth" : false, //是否自适应宽度  
+		 "bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+		 "bPaginate" : true, //是否显示（应用）分页器  
+		 "bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+		 "bSort" : true, //是否启动各个字段的排序功能  
+		 "aaSorting": [[2,"desc"]],//设置第4个元素为默认排序  降序
+		 "bFilter" : true, //是否启动过滤、搜索功能  
+		 "bDestroy": true,//重要
+		 "sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+		 "bServerSide" : true, //是否启动服务器端数据导入  
+		  "sAjaxSource": 'GetAllViewPaging.do?random='+Math.random(),
+		  "sAjaxDataProp":"aaData",//结果集
+		  "sDom": '<""l>t<"F"fp>',
+		  "fnServerData": retrieveData, // 获取数据的处理函数
+		  "aoColumns": [
+	            { "mDataProp": "peopleName", },  
+	            { "mDataProp": "peopleDept" },
+	            { "mDataProp": "attendTime" },
+	            { "mDataProp": "leaveTime" },
+	            { "mDataProp": "remarks"},
+	            { "mDataProp": "entryTime" },
+	            { "mDataProp": null,
+	              //"sDefaultContent" : "操作",
+	              "sWidth":"6%"
+	            }
+        	],
+          "aoColumnDefs":[
+	          {
+	          "aTargets": [6],
+        	  "fnRender": function(aData, sData) {
+        	  aa="<div class='btn-group'><button data-toggle='dropdown' class='btn btn-info dropdown-toggle'>操作 <span class='caret'></span></button>";
+        	  bb="<ul class='dropdown-menu'><security:authorize access="hasAnyRole('ROLE_CHECKVIEW','ROLE_ADMIN')"><li><a href='<%=path%>/CheckAttendanceInfo/Lookup.do?id=" + aData.aData.id + "&id_menu=c_getAll'>查看</a></li></security:authorize>";
+			  cc="<security:authorize access="hasAnyRole('ROLE_CHECKDEL','ROLE_ADMIN')"><li><a href='<%=path%>/CheckAttendanceInfo/Del.do?id=" + aData.aData.id + "'onclick=\"return(confirm('确定删除?'))\">删除</a></li></security:authorize></ul></div>";
+        	  return aa+bb+cc;
+     		}
+        	  },
+          ]
+     });  
+ });
+		//服务器端，数据传参及回调处理  
+		function retrieveData( sSource,aoData, fnCallback) {
+		      $.ajax({
+		          url : sSource,//这个就是请求地址对应sAjaxSource
+		          data : {"aoData":JSON.stringify(aoData)},//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
+		          type : 'post',
+		          dataType : 'json',
+		          success : function(data) {
+		              fnCallback(data);//把返回的数据传给这个方法就可以了,datatable自动绑定数据.
+		          },
+		          error : function(msg) {
+		          }
+		      });
+		  }
+	</script>
+</body>
+</html>

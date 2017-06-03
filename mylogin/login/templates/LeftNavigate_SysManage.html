@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+</head>
+</head>
+<body>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+	function change_bar_index(){
+		var current_index = getQueryString("id_menu");
+		switch(current_index){
+			/* 快速导航 */
+			case "shortcut":
+			document.getElementById("shortcut").className = "submenu active open";
+			document.getElementById("shortcut").className = "active";
+			break;
+			case "Department":
+			document.getElementById("Department").className="submenu active open";
+			document.getElementById("Department").className="active";
+			break;		
+			case "Device":
+			document.getElementById("Device").className="submenu active open";
+			document.getElementById("Device").className="active";
+			break;	
+			case "submenu_sys":
+			document.getElementById("submenu_sys").className="submenu active open";
+			document.getElementById("submenu_sys").className="active";
+			break;
+			case "SsU":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsU").className="active";
+			break;	
+			case "SsRoles":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsRoles").className="active";
+			break;	
+			case "SsA":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsA").className="active";
+			break;	
+			case "SsR":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsR").className="active";
+			break;	
+			case "SsUR":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsUR").className="active";
+			break;	
+			case "SsRA":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsRA").className="active";
+			break;	
+			case "SsAR":
+			document.getElementById("submenu_auth").className="submenu active open";
+			document.getElementById("SsAR").className="active";
+			break;		
+			/* 任务管理 */
+			case "todotask":
+			document.getElementById("task").className = "submenu active open";
+			document.getElementById("todotask").className = "active";
+			break;
+			case "todonetask":
+			document.getElementById("task").className = "submenu active open";
+			document.getElementById("todonetask").className = "active";
+			break;
+			/* 流程管理 */
+			case "deployment":
+			document.getElementById("workflow").className = "submenu active open";
+			document.getElementById("deployment").className = "active";
+			break;
+			case "processdef":
+			document.getElementById("workflow").className = "submenu active open";
+			document.getElementById("processdef").className = "active";
+			break;
+			/*  考勤管理 */
+			case "w_getAll":
+			document.getElementById("manager").className = "submenu active open";
+			document.getElementById("w_getAll").className = "active";
+			break;
+			case "c_getAll":
+			document.getElementById("manager").className = "submenu active open";
+			document.getElementById("c_getAll").className = "active";
+			break;
+			/*  员工管理   */
+			case "w_baseInfo":
+			document.getElementById("employ").className = "submenu active open";
+			document.getElementById("w_baseInfo").className = "active";
+			break;
+			case "w_loginInfo":
+			document.getElementById("employ").className = "submenu active open";
+			document.getElementById("w_loginInfo").className = "active";
+			break;
+			case "w_demissiionInfo":
+			document.getElementById("employ").className = "submenu active open";
+			document.getElementById("w_demissiionInfo").className = "active";
+			break;
+			case "node_manager":
+			document.getElementById("node_manager").className="submenu active open";
+			document.getElementById("node_manager").className="active";
+			break;
+			/*  定位管理   */
+			case "monitor":
+			document.getElementById("position").className = "submenu active open";
+			document.getElementById("monitor").className = "active";
+			break;
+			case "trace_replay":
+			document.getElementById("position").className = "submenu active open";
+			document.getElementById("trace_replay").className = "active";
+			break;
+			default:
+			break;
+		}
+	}
+$(document).ready(function() {
+	change_bar_index();
+});
+</script>
+	<!-- 左侧导航条 -->
+	<div id="sidebar">
+		<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+        		<a data-toggle="collapse" data-parent="#accordion" href="../home/index.do?id_menu=shortcut&useraccount=<security:authentication property="name"/><i class="icon icon-home"></i><span>去前台</span></a>
+        	</h4>
+    		</div>
+    	<div id="collapseOne" class="panel-collapse collapse">
+      	<div class="panel-body">
+      	</div>
+    	</div>
+  	</div>
+  	</div>				
+				<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_STAFFDTYVIEW','ROLE_STAFFDTYADD','ROLE_STAFFDTYDEL','ROLE_STAFFVIEW','ROLE_STAFFADD','ROLE_STAFFDEL')">
+				<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+        		<a data-toggle="collapse" data-parent="#accordion" href="../DepartmentInfo/GetAllView.do?id_menu=Department&useraccount=<security:authentication property="name"/><i class="icon icon-book"></i><span>组织结构</span></a>
+        			</h4>
+    		</div>
+    	<div id="collapseTwo" class="panel-collapse collapse">
+      	<div class="panel-body">
+      	</div>
+    	</div>
+  		</div>
+  	</div>										
+				</security:authorize>
+				<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_STAFFDTYVIEW','ROLE_STAFFDTYADD','ROLE_STAFFDTYDEL','ROLE_STAFFVIEW','ROLE_STAFFADD','ROLE_STAFFDEL')">
+					<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+        		<a data-toggle="collapse" data-parent="#accordion" href="../device_manager/getAllElectronicPassport.do?id_menu=Device&useraccount<security:authentication property="name"/><i class="icon icon-book"></i><span>设备管理</span></a>
+					</h4>
+    		</div>
+    	<div id="collapseThree" class="panel-collapse collapse">
+      	<div class="panel-body">
+      		</div>
+    	</div>
+  		</div>
+  	</div>									
+				</security:authorize>
+			<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SYSTEMDTYVIEW','ROLE_SYSTEMDTYADD','ROLE_SYSTEMDTYDEL')">
+					<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+        		<a data-toggle="collapse" data-parent="#accordion" href="../node_manager/getNodeManager.do?id_menu=node_manager&useraccount=<security:authentication property="name"/><i class="icon icon-book"></i><span>隧道管理</span></a>
+        				</h4>
+    		</div>
+    	<div id="collapseFour" class="panel-collapse collapse">
+      	<div class="panel-body">
+      		</div>
+    	</div>
+  		</div>
+  	</div>	
+				</security:authorize>	
+								<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SYSTEMDTYVIEW','ROLE_SYSTEMDTYADD','ROLE_SYSTEMDTYDEL')">
+		<!--更改pannel-->
+		<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+        		<a data-toggle="collapse" data-parent="#accordion" 
+          href="#collapseFive">
+          	<i class="icon icon-tint"></i><span>定位管理</span><span class="label">2</span>
+        		</a>
+      		</h4>
+    		</div>
+    	<div id="collapseFive" class="panel-collapse collapse">
+      	<div class="panel-body">
+        	<ul>
+							<li id="monitor"><a href="../node_manager/getOutdoor.do?id_menu=monitor&useraccount=<security:authentication property="name"/>室外监控</a></li>
+							<li id="trace_replay"><a href="../node_manager/getOutdoorTrace.do?id_menu=trace_replay&useraccount=<security:authentication property="name"/>室外轨迹</a></li>												
+					</ul>
+      	</div>
+    	</div>
+  		</div>
+  	</div>
+				</security:authorize>	
+		<security:authorize
+			access="hasAnyRole('ROLE_ADMIN','ROLE_CHECKVIEW','ROLE_CHECKADD','ROLE_CHECKDEL')">
+			<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+      			<a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><i
+					class="icon icon-th-list"></i><span>考勤管理</span><span class="label">2</span>
+			</a>
+			</h4>
+    		</div>
+    	<div id="collapseSix" class="panel-collapse collapse">
+      	<div class="panel-body">
+				<ul>
+					<li id="w_getAll"><a
+						href="../WorkerLeaveInfo/GetAllView.do?id_menu=w_getAll&useraccount=<security:authentication property="name"/>员工请假</a>
+					</li>
+					<li id="c_getAll"><a
+						href="../CheckAttendanceInfo/GetAllView.do?id_menu=c_getAll&useraccount=<security:authentication property="name"/>考勤信息</a>
+					</li>		
+				</ul>
+			</div>
+    	</div>
+  		</div>
+  	</div>
+</div>
+		</security:authorize>				
+				<security:authorize
+					access="hasAnyRole('ROLE_ADMIN','ROLE_STAFFVIEW','ROLE_STAFFADD','ROLE_STAFFDEL')">
+					<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+      			<a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven"><i
+							class="icon icon-tint"></i><span>员工管理</span><span class="label">2</span>
+					</a>
+					</h4>
+    		</div>
+    	<div id="collapseSeven" class="panel-collapse collapse">
+      	<div class="panel-body">
+						<ul>
+							<li id="w_baseInfo"><a
+								href="../workerbase/getAllWorkerBaseInfo.do?id_menu=w_baseInfo&useraccount=<security:authentication property="name"/>基本信息</a>
+							</li>
+							<li id="w_demissiionInfo"><a
+								href="../workerdemission/getAllWorkerDemissionInfo.do?id_menu=w_demissiionInfo&useraccount=<security:authentication property="name"/>离职记录</a>
+							</li>							
+						</ul>
+					</div>
+    	</div>
+  		</div>
+  	</div>
+				</security:authorize>	
+				
+		<security:authorize
+			access="hasAnyRole('ROLE_ADMIN','ROLE_CHECKVIEW','ROLE_CHECKADD','ROLE_CHECKDEL')">
+			<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+      			<a data-toggle="collapse" data-parent="#accordion" href="#collapseEight"><i
+					class="icon icon-th-list"></i><span>任务管理</span><span class="label">2</span>
+			</a>
+			</h4>
+    		</div>
+    	<div id="collapseEight" class="panel-collapse collapse">
+      	<div class="panel-body">
+				<ul>
+					<li id="todotask"><a
+						href="../task/getTodoTasklistByUser.do?id_menu=todotask&useraccount=<security:authentication property="name"/>待办任务</a>
+					</li>
+					<li id="todonetask"><a
+						href="../task/getTodoneTasklistByUser.do?id_menu=todonetask&useraccount=<security:authentication property="name"/>已办任务</a>
+					</li>	
+				</ul>
+				</div>
+    	</div>
+  		</div>
+  	</div>
+		</security:authorize>						
+		<security:authorize
+			access="hasAnyRole('ROLE_ADMIN','ROLE_CHECKVIEW','ROLE_CHECKADD','ROLE_CHECKDEL')">
+			<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+      			<a data-toggle="collapse" data-parent="#accordion" href="#collapseNine"><i
+					class="icon icon-th-list"></i><span>流程管理</span><span class="label">2</span>
+			</a>
+			</h4>
+    		</div>
+    	<div id="collapseNine" class="panel-collapse collapse">
+      	<div class="panel-body">
+				<ul>
+					<li id="deployment"><a
+						href="../deployment/deploymentlist.do?id_menu=deployment&useraccount=<security:authentication property="name"/>部署对象列表</a>
+					</li>
+					<li id="processdef"><a
+						href="../deployment/processdeflist.do?id_menu=processdef&useraccount=<security:authentication property="name"/>流程定义列表</a>
+					</li>	
+				</ul>
+				</div>
+    	</div>
+  		</div>
+  	</div>
+		</security:authorize>							
+				<div class="panel-group" id="accordion">		
+			<div class="panel panel-default">
+    		<div class="panel-heading">
+      		<h4 class="panel-title">
+      			<a data-toggle="collapse" data-parent="#accordion" href="#collapseTen"><i class="icon icon-th-list"></i><span>权限管理</span><span class="label">7</span></a>
+			</h4>
+    		</div>
+    	<div id="collapseNine" class="panel-collapse collapse">
+      	<div class="panel-body">
+
+					<ul>
+						<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_AUTHVIEW','ROLE_AUTHADD','ROLE_AUTHDEL')">
+						<li id=SsU><a href="../SsUsers/GetAllView.do?id_menu=SsU&useraccount=<security:authentication property="name"/>" class="current">用户设置</a></li>
+						<li id=SsRoles><a href="../SsRoles/GetAllView.do?id_menu=SsRoles&useraccount=<security:authentication property="name"/>" class="current">角色设置</a></li>
+						</security:authorize>
+						<!--拥有ROLE_ADMIN权限的用户才能看到下面的内容  -->
+						<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+							<li id=SsA><a href="../SsAuthorities/GetAllView.do?id_menu=SsA&useraccount=<security:authentication property="name"/>" class="current">权限设置</a></li>
+							<li id=SsR><a href="../SsResources/GetAllView.do?id_menu=SsR&useraccount=<security:authentication property="name"/>" class="current">资源设置</a></li>
+							<li id=SsUR><a href="../SsUsersRoles/GetAllView.do?id_menu=SsUR&useraccount=<security:authentication property="name"/>" class="current">用户角色映射</a></li>
+							<li id=SsRA><a href="../SsRolesAuthorities/GetAllView.do?id_menu=SsRA&useraccount=<security:authentication property="name"/>" class="current">角色权限映射</a></li>
+							<li id=SsAR><a href="../SsAuthoritiesResources/GetAllView.do?id_menu=SsAR&useraccount=<security:authentication property="name"/>" class="current">权限资源映射</a></li>
+						</security:authorize>	
+					</ul>
+				</div>
+    	</div>
+  		</div>
+  	</div>
+					
+				<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SYSTEMDTYVIEW','ROLE_SYSTEMDTYADD','ROLE_SYSTEMDTYDEL')">
+				<li id=submenu_sys><a href="../SystemDictionaryInfo/GetAllView.do?id_menu=submenu_sys&useraccount=<security:authentication property="name"/><i class="icon icon-book"></i><span>系统字典</span></a></li>
+				</security:authorize>										
+			</ul>
+				
+		</div>
+		
+		<!-- 右偏上style选择 -->
+<!-- 		<div id="style-switcher">
+			<i class="icon-arrow-left icon-white"></i>
+			<span>Style:</span>
+			<a href="#grey" style="background-color: #555555;border-color: #aaaaaa;"></a>
+			<a href="#blue" style="background-color: #2D2F57;"></a>
+			<a href="#red" style="background-color: #673232;"></a>
+		</div> -->
+		
+</body>
+</html>

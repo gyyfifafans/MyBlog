@@ -7,7 +7,7 @@ Just for practicing 【 Django 1.8.6】  using pyhon 2.7.10
 
 现在才传上来，大部分代码由于django 更新可能都没法用了，而且写得也零零碎碎的：）
 
-前端  bootstrap   （原本是打算用这个的。。）
+前端  bootstrap   （原本是打算用这个的。。）啊，事实上也有一个页面用了 /test
 后端  django 1.8.6
 
 语言：Python 2.7.10
